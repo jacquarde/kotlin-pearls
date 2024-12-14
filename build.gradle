@@ -1,0 +1,41 @@
+plugins {
+    id "java"
+    id "org.jetbrains.kotlin.jvm" version  "${kotlin_version}"
+}
+
+group 'com.ubertob'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.11
+
+repositories {
+    mavenCentral()
+}
+
+
+wrapper {
+    gradleVersion = "7.5.1"
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3'
+    testImplementation 'com.willowtreeapps.assertk:assertk-jvm:0.17'
+    testImplementation 'io.strikt:strikt-core:0.31.0'
+    testImplementation 'com.beust:klaxon:5.5'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
+//    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+}
+
+
+test {
+    useJUnitPlatform()
+    testLogging.showStandardStreams = true
+}
+
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-XXLanguage:+InlineClasses", "-Xcontext-receivers"]
+    }
+}
